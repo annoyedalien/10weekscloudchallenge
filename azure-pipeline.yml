@@ -1,0 +1,14 @@
+trigger:
+- main
+
+pool:
+  MyAgent
+
+steps:
+- task: AzureCLI@2
+  displayName: 'Running Pipeline Script'
+  inputs:
+    azureSubscription: 'ServiceConnection'
+    scriptType: 'bash'
+    scriptLocation: 'scriptPath'
+    scriptPath: 'storageupdate.sh'
