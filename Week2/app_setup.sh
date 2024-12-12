@@ -33,7 +33,7 @@ if [[ "$ans" == "no" ]]; then
 elif [[ "$ans" == "yes" ]]; then
 
 cd backend
-sudo nano .env
+sudo nano backend/.env
 
 echo "----------------------------------------------------------"
 echo "|            Installing NPM and Dotenv                    |"
