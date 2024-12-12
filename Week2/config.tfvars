@@ -1,1 +1,0 @@
-location-rg = "eastasia"
