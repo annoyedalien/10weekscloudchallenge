@@ -16,7 +16,7 @@ const db = mysql.createConnection({
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   port: process.env.PORT,
-  database: "test",
+  database: "webappdb",
 });
 
 app.get("/", (req, res) => {

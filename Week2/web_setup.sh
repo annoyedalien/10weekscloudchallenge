@@ -24,7 +24,7 @@ sudo yarn global add pm2 -y
 
 
 echo "----------------------------------------------------------"
-echo "|      Do you want make changes to config.js file?        |"
+echo "|   Do you want to make changes to config.js file?        |"
 echo "----------------------------------------------------------"
 
 read -p "yes/no: " ans
@@ -36,6 +36,9 @@ elif [[ "$ans" == "yes" ]]; then
 cd client
 sudo nano src/pages/config.js
 
+echo "----------------------------------------------------------"
+echo "|        Installing NPM and running build                 |"
+echo "----------------------------------------------------------"
 
 sudo npm install
 npm run build

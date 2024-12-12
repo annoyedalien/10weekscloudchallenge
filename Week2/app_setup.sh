@@ -23,7 +23,7 @@ corepack prepare yarn@stable --activate --yes
 sudo yarn global add pm2 -y
 
 echo "----------------------------------------------------------"
-echo "|      Do you want make changes to .env file?             |"
+echo "|      Do you want to create an .env file?             |"
 echo "----------------------------------------------------------"
 
 read -p "yes/no: " ans
@@ -33,7 +33,7 @@ if [[ "$ans" == "no" ]]; then
 elif [[ "$ans" == "yes" ]]; then
 
 cd backend
-sudo nano backend/.env
+sudo vim backend/.env
 
 echo "----------------------------------------------------------"
 echo "|            Installing NPM and Dotenv                    |"

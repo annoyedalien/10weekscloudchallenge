@@ -206,8 +206,36 @@ az vm create \
     --authentication-type "ssh" \
     --ssh-key-value "~/.ssh/host_key.pub" \
     --size "Standard_B1s" \
-    --public-ip-sku "Standard"
+    --public-ip-sku "Standard"\
+    --no-wait
 
+az vm create \
+    --resource-group "$resourceGroupName" \
+    --name "WebVM" \
+    --location "$location" \
+    --vnet-name "$vnetName" \
+    --subnet "$subnetFrontendName" \
+    --image "Ubuntu2204" \
+    --admin-username "azureuser" \
+    --authentication-type "ssh" \
+    --ssh-key-value "~/.ssh/host_key.pub" \
+    --size "Standard_B1s" \
+    --public-ip-address ""\
+    --no-wait
+
+az vm create \
+    --resource-group "$resourceGroupName" \
+    --name "AppVM" \
+    --location "$location" \
+    --vnet-name "$vnetName" \
+    --subnet "$subnetBackendName" \
+    --image "Ubuntu2204" \
+    --admin-username "azureuser" \
+    --authentication-type "ssh" \
+    --ssh-key-value "~/.ssh/host_key.pub" \
+    --size "Standard_B1s" \
+    --public-ip-address ""\
+    --no-wait
 
 echo "Jumpbox VM created."
 echo  
