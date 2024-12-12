@@ -20,24 +20,29 @@ corepack enable
 
 corepack prepare yarn@stable --activate --yes
 
-sudo yarn global add pm2
+sudo yarn global add pm2 -y
 
 
 echo "----------------------------------------------------------"
-echo "| Do you want make changes to config.js file?             |"
+echo "|      Do you want make changes to config.js file?        |"
 echo "----------------------------------------------------------"
 
 read -p "yes/no: " ans
 
 if [[ "$ans" == "no" ]]; then
- echo "Great So, make Changes to line 58 replace it with intenal-loadbalancer-dns "
+ echo "Make changes to client/src/pages/config.js "
 elif [[ "$ans" == "yes" ]]; then
 
-sudo nano /client/src/pages/config.js
 cd client
+sudo nano src/pages/config.js
+
 
 sudo npm install
 npm run build
 sudo cp -r build/* /var/www/html
 
 
+else
+ echo 
+ echo "Enter Valid Answer"
+fi 
