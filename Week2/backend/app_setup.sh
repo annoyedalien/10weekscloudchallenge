@@ -9,5 +9,8 @@ npm install cors
 npm init -y
 
 sudo npm install -g pm2
-sudo npm install
+sudo npm install -y
+
+mysql -h mysql-serverdemo.mysql.database.azure.com -u mysqladmin -p <db_setup.sql
+
 
