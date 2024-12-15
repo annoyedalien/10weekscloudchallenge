@@ -13,4 +13,8 @@ sudo npm install -y
 
 mysql -h mysql-serverdemo.mysql.database.azure.com -u mysqladmin -p <db_setup.sql
 
+pm2 start backendapp.js
+startup_as_process=$(pm2 startup | grep -o 'sudo env.*')
+eval "$startup_as_process"
+pm2 save
 

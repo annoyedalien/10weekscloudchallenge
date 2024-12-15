@@ -170,11 +170,6 @@ az network vnet subnet update \
     --name "$subnetBackendName" \
     --network-security-group "${subnetBackendName}-NSG"
 
-az network vnet subnet update \
-    --resource-group "$resourceGroupName" \
-    --vnet-name "$vnetName" \
-    --name "$subnetDatabaseName" \
-    --network-security-group "${subnetDatabaseName}-NSG"
 
 echo "Associated NSG to Subnets."
 echo  
@@ -220,11 +215,6 @@ az mysql flexible-server create \
  --admin-user "mysqladmin" \
  --admin-password "MyPassword123" 
 
-az mysql flexible-server parameter set \
---resource-group "$resourceGroupName" \
---server-name "mysql-serverdemo" \
---name require_secure_transport --value OFF \
---no-wait
 
 echo "MySQL DB created."
 echo  
