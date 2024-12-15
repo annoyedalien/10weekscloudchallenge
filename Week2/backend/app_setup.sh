@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 sudo apt-get install update
 sudo apt install npm -y
