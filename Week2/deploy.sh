@@ -4,7 +4,6 @@
 resourceGroupName="MyResourceGroup"
 location="East Asia"
 vnetName="MyVnet"
-subnetJumpboxName="Jumpbox-Subnet"
 subnetFrontendName="Web-Subnet"
 subnetBackendName="App-Subnet"
 subnetDatabaseName="DB-Subnet"
@@ -12,7 +11,7 @@ subnetAppGWName="Appgw-Subnet"
 
 #mykey=$(cat ~/.ssh/host_key.pub)
 
-#ssh-keygen -t rsa -f host_key
+ssh-keygen -t rsa -f host_key
 
 yourPublicIP=$(curl -s https://api.ipify.org)
 
@@ -138,7 +137,7 @@ az network nsg rule create \
 az network nsg rule create \
     --resource-group "$resourceGroupName" \
     --nsg-name "${subnetBackendName}-NSG" \
-    --name "AllowMySQL" \
+    --name "AllowCustom" \
     --priority 1010 \
     --protocol "Tcp" \
     --direction "Inbound" \
@@ -170,6 +169,11 @@ az network vnet subnet update \
     --name "$subnetBackendName" \
     --network-security-group "${subnetBackendName}-NSG"
 
+az network vnet subnet update \
+    --resource-group "$resourceGroupName" \
+    --vnet-name "$vnetName" \
+    --name "$subnetDatabaseName" \
+    --network-security-group "${subnetDatabaseName}-NSG"
 
 echo "Associated NSG to Subnets."
 echo  
@@ -183,7 +187,8 @@ az vm create \
     --subnet "$subnetFrontendName" \
     --image "Ubuntu2204" \
     --admin-username "azureuser" \
-    --admin-password "MyPassword123" \
+    --authentication-type "ssh" \
+    --ssh-key-value host_key.pub \
     --size "Standard_B2s" \
     --nsg "" 
 
@@ -195,7 +200,8 @@ az vm create \
     --subnet "$subnetBackendName" \
     --image "Ubuntu2204" \
     --admin-username "azureuser" \
-    --admin-password "MyPassword123" \
+    --authentication-type "ssh" \
+    --ssh-key-value host_key.pub \
     --size "Standard_B2s" \
     --nsg "" 
 
@@ -215,6 +221,7 @@ az mysql flexible-server create \
  --admin-user "mysqladmin" \
  --admin-password "MyPassword123" 
 
+az mysql flexible-server parameter set --resource-group "$resourceGroupName" --server-name "mysql-serverdemo" --name require_secure_transport --value OFF 
 
 echo "MySQL DB created."
 echo  

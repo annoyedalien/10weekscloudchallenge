@@ -8,7 +8,7 @@ const App = () => {
     const [dogDescription, setDogDescription] = useState('');
 
     useEffect(() => {
-        axios.get('http://your-app-server-ip:3000/api/dogs')
+        axios.get('http://your-app-server-ip:80/api/dogs')
             .then(response => {
                 console.log(response.data); // Log the response data
                 setDogs(response.data);
@@ -18,7 +18,7 @@ const App = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://your-app-server-ip:3000/api/dogs', { name: dogName, description: dogDescription })
+        axios.post('http://your-app-server-ip:80/api/dogs', { name: dogName, description: dogDescription })
             .then(response => {
                 setDogs([...dogs, { id: response.data.insertId, name: dogName, description: dogDescription }]);
                 setDogName('');

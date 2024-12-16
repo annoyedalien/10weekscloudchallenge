@@ -10,7 +10,9 @@ npm init -y
 
 sudo npm install -g pm2
 sudo npm install -y
-
+echo "-----------------------------------------"
+echo "|    Enter Password for MySQL Server     |"
+echo "-----------------------------------------"
 mysql -h mysql-serverdemo.mysql.database.azure.com -u mysqladmin -p <db_setup.sql
 
 pm2 start backendapp.js
